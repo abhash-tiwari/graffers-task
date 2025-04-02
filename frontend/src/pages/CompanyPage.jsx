@@ -10,6 +10,10 @@ const CompanyPage = ({ user }) => {
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
   
+  const getInitials = (name) => {
+    return name.charAt(0).toUpperCase();
+  };
+  
   useEffect(() => {
     const fetchCompanyAndReviews = async () => {
       try {
@@ -44,12 +48,20 @@ const CompanyPage = ({ user }) => {
         <div className="flex">
           <div className="w-24 h-24 mr-6">
             {company.logo ? (
-              <img src={company.logo} alt={company.name} className="w-full h-full object-contain" />
-            ) : (
-              <div className="w-full h-full flex items-center justify-center bg-gray-200 text-gray-500 text-3xl font-bold">
-                {company.name.charAt(0)}
-              </div>
-            )}
+              <img 
+                src={company.logo} 
+                alt={company.name} 
+                className="w-full h-full object-contain rounded-lg"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.style.display = 'none';
+                  e.target.parentElement.querySelector('.logo-placeholder').style.display = 'flex';
+                }}
+              />
+            ) : null}
+            <div className={`logo-placeholder w-full h-full flex items-center justify-center bg-gradient-to-br from-purple-500 to-purple-600 text-white text-4xl font-bold rounded-lg ${company.logo ? 'hidden' : ''}`}>
+              {getInitials(company.name)}
+            </div>
           </div>
           
           <div className="flex-1">
