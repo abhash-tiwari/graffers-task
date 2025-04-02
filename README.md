@@ -43,9 +43,10 @@ project/
 │   │   │   ├── AddCompanyModal.jsx
 │   │   │   ├── CompanyCard.jsx
 │   │   │   ├── Header.jsx
-│   │   │   └── ReviewForm.jsx
+│   │   │   └── ReviewCard.jsx
 │   │   ├── pages/
 │   │   │   ├── HomePage.jsx
+│   │   │   ├── AddReviewPage.jsx
 │   │   │   ├── CompanyPage.jsx
 │   │   │   ├── LoginPage.jsx
 │   │   │   └── SignupPage.jsx
@@ -59,37 +60,35 @@ project/
     │   ├── Review.js
     │   └── User.js
     ├── routes/
-    │   ├── auth.js
-    │   ├── companies.js
-    │   └── reviews.js
+    │   ├── userRoutes.js
+    │   ├── companyRoutes.js
+    │   └── reviewRoutes.js
     ├── middleware/
     │   └── auth.js
     ├── config/
     │   └── db.js
-    ├── uploads/
+    ├── controllers/
+    │   └── companyController.js
+    │   └── reviewController.js
+    │   └── userController.js
     └── server.js
 ```
 
 ## API Routes
 
 ### Authentication
-- `POST /api/auth/signup` - Register a new user
-- `POST /api/auth/login` - Login user
-- `POST /api/auth/logout` - Logout user
+- `POST /api/users/` - Register a new user
+- `POST /api/users/login` - Login user
 
 ### Companies
 - `GET /api/companies` - Get all companies (with filters)
-  - Query params: city, sort (name/rating/newest)
 - `POST /api/companies` - Add a new company
 - `GET /api/companies/:id` - Get company details
-- `PUT /api/companies/:id` - Update company details
-- `DELETE /api/companies/:id` - Delete a company
 
 ### Reviews
-- `GET /api/reviews/company/:companyId` - Get reviews for a company
-- `POST /api/reviews` - Add a new review
-- `PUT /api/reviews/:id` - Update a review
-- `DELETE /api/reviews/:id` - Delete a review
+- `GET /api/reviews/:companyId` - Get reviews for a company
+- `POST /api/reviews/` - Add a new review
+- `PUT /api/reviews/:id/like` - Like a review
 
 ## Frontend Routes
 
@@ -109,7 +108,7 @@ project/
 
 1. Clone the repository
 ```bash
-git clone <repository-url>
+git clone https://github.com/abhash-tiwari/graffers-task
 ```
 
 2. Install backend dependencies
@@ -151,7 +150,7 @@ npm run dev
 - `PORT` - Backend server port (default: 5000)
 
 ### Frontend
-- `VITE_API_URL` - Backend API URL (default: http://localhost:5000)
+- `VITE_API_URL` - Backend API URL (default: http://localhost:5000), Hosted URL (https://graffers-task.onrender.com)
 
 ## Contributing
 
@@ -160,7 +159,3 @@ npm run dev
 3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details. 
